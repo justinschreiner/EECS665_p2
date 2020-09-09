@@ -168,6 +168,8 @@ type 		: INT
 		  }
 
 fnDecl	: type id formals fnBody
+		{
+		}
 
 id		: ID
 		  {
