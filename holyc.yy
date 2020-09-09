@@ -171,6 +171,181 @@ fnDecl	: type id formals fnBody
 		{
 		}
 
+formals	: LPAREN RPAREN
+		  {
+		  }
+		| LPAREN formalsList RPAREN
+		  {
+		  }
+
+formalsList	: formalDecl
+		  {
+		  }
+		| formalDecl COMMA formalsList
+		  {
+		  }
+
+formalDecl	: type id
+		  {
+		  }
+
+fnBody	: LCURLY stmtList RCURLY
+		  {
+		  }
+
+stmtList	: stmtList stmt
+		  {
+		  }
+		| /* epsilon */
+		  {
+		  }
+
+stmt		: varDecl SEMICOLON
+	  	  { 
+		  }
+		| assignExp SEMICOLON
+	  	  { 
+		  }
+		| lval DASHDASH SEMICOLON
+	  	  { 
+		  }
+		| lval CROSSCROSS SEMICOLON
+	  	  { 
+		  }
+		| FROMCONSOLE lval SEMICOLON
+	  	  { 
+		  }
+		| TOCONSOLE exp SEMICOLON
+	  	  { 
+		  }
+		| IF LPAREN exp RPAREN LCURLY stmtList RCURLY
+	  	  { 
+		  }
+		| IF LPAREN exp RPAREN LCURLY stmtList RCURLY ELSE LCURLY stmtList RCURLY
+	  	  { 
+		  }
+		| WHILE LPAREN exp RPAREN LCURLY stmtList RCURLY
+	  	  { 
+		  }
+		| RETURN exp SEMICOLON
+	  	  { 
+		  }
+		| RETURN SEMICOLON
+	  	  { 
+		  }
+		| fncall SEMICOLON
+	  	  { 
+		  }
+
+assignExp	: lval ASSIGN exp
+		  {
+		  }
+
+fncall	: id LPAREN RPAREN
+		  {
+		  }
+		| id LPAREN actualsList RPAREN
+		  {
+		  }
+
+actualsList	: exp
+		  {
+		  }
+		| actualsList COMMA exp
+		  {
+		  }
+
+exp		: assingnExp
+	  	  { 
+		  }
+		| exp DASH exp
+	  	  { 
+		  }
+		| exp CROSS exp
+	  	  { 
+		  }
+		| exp STAR exp
+	  	  { 
+		  }
+		| exp SLASH exp
+	  	  { 
+		  }
+		| exp AND exp
+	  	  { 
+		  }
+		| exp OR exp
+	  	  { 
+		  }
+		| exp EQUALS exp
+	  	  { 
+		  }
+		| exp NOTEQUALS exp
+	  	  { 
+		  }
+		| exp GREATER exp
+	  	  { 
+		  }
+		| exp GREATEREQ exp
+	  	  { 
+		  }
+		| exp LESS exp
+	  	  { 
+		  }
+		| exp LESSEQ exp
+	  	  { 
+		  }
+		| NOT exp
+	  	  { 
+		  }
+		| DASH term
+	  	  { 
+		  }
+		| term
+	  	  { 
+		  }
+
+term		: lval
+	  	  { 
+		  }
+		| INTLITERAL
+	  	  { 
+		  }
+		| STRLITERAL
+	  	  { 
+		  }
+		| CHORLIT
+	  	  { 
+		  }
+		| TRUE
+	  	  { 
+		  }
+		| FALSE
+	  	  { 
+		  }
+		| NULLPTR
+	  	  { 
+		  }
+		| LPAREN exp RPAREN
+	  	  { 
+		  }
+		| fncall
+	  	  { 
+		  }
+
+lval		: id
+	  	  { 
+		  }
+		| id LBRACE exp RBRACE
+	  	  { 
+		  }
+		| AT id
+	  	  { 
+		  }
+		| CARAT id
+		  {
+		  }
+
+
 id		: ID
 		  {
 		  }
