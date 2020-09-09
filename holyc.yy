@@ -135,7 +135,11 @@ globals 	: globals decl
 		  }
 
 decl 		: varDecl SEMICOLON
-		  { }
+		  {
+		  }
+		  | fnDecl
+		  {
+		  }
 
 varDecl 	: type id
 		  {
@@ -147,6 +151,23 @@ type 		: INT
 		| INTPTR
 	  	  { 
 		  }
+		| BOOL
+	  	  { 
+		  }
+		| BOOLPTR
+	  	  { 
+		  }
+		| CHAR
+	  	  { 
+		  }
+		| CHARPTR
+	  	  { 
+		  }
+		| VOID
+	  	  { 
+		  }
+
+fnDecl	: type id formals fnBody
 
 id		: ID
 		  {
