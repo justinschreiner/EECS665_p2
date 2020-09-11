@@ -130,7 +130,7 @@ project)
 program 		: globals {}
 
 globals 		: globals decl {}
-						| {} // epsilon
+						| /* epsilon */ {}
 
 decl 				: varDecl SEMICOLON {}
 		  			| fnDecl {}
@@ -181,7 +181,8 @@ fncall			: id LPAREN RPAREN {}
 actualsList	: exp {}
 						| actualsList COMMA exp {}
 
-exp					: orExp {} // NEED: RULE FOR ASSIGNMENT EXPRESSION
+exp					: assignExp {} // NEED: RULE FOR ASSIGNMENT EXPRESSION
+						| orExp {}
 
 orExp				: orExp OR andExp {}
 						| andExp	{}
@@ -205,7 +206,8 @@ multDivExp 	: multDivExp STAR dashNotExp {}
 						| multDivExp SLASH dashNotExp {}
 						| dashNotExp {}
 					
-dashNotExp 	: DASH term {}  // NEED: RULE FOR NOT
+dashNotExp 	: NOT exp // Is this right?
+						| DASH term {}
 					 	| term {}
 
 
