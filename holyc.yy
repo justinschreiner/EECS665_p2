@@ -181,7 +181,7 @@ fncall			: id LPAREN RPAREN {}
 actualsList	: exp {}
 						| actualsList COMMA exp {}
 
-exp					: assignExp {} // NEED: RULE FOR ASSIGNMENT EXPRESSION
+exp					: assignExp {} // Is this right?
 						| orExp {}
 
 orExp				: orExp OR andExp {}
