@@ -62,7 +62,11 @@ have translation attributes for non-terminals in the next
 project)
 */
 %union {
-   holyc::Token*                         transToken;
+   holyc::Token* transToken;
+	 holyc::Token* transCharToken;
+	 holyc::Token* transIDToken;
+	 holyc::Token* transIntToken;
+	 holyc::Token* transStrToken;
 }
 
 %token                   END	   0 "end file"
@@ -123,232 +127,104 @@ project)
    grammar and make sure that all of the productions of the 
    given nonterminals are complete
 */
-program 	: globals
-		  {
-		  }
+program 		: globals {}
 
-globals 	: globals decl 
-	  	  { 
-	  	  }
-		| /* epsilon */
-		  {
-		  }
+globals 		: globals decl {}
+						| {} // epsilon
 
-decl 		: varDecl SEMICOLON
-		  {
-		  }
-		  | fnDecl
-		  {
-		  }
+decl 				: varDecl SEMICOLON {}
+		  			| fnDecl {}
 
-varDecl 	: type id
-		  {
-		  }
+varDecl 		: type id {}
 
-type 		: INT
-	  	  { 
-		  }
-		| INTPTR
-	  	  { 
-		  }
-		| BOOL
-	  	  { 
-		  }
-		| BOOLPTR
-	  	  { 
-		  }
-		| CHAR
-	  	  { 
-		  }
-		| CHARPTR
-	  	  { 
-		  }
-		| VOID
-	  	  { 
-		  }
+type 				: INT {}
+						| INTPTR {}
+						| BOOL {}
+						| BOOLPTR {}
+						| CHAR {}
+						| CHARPTR {}
+						| VOID {}
 
-fnDecl	: type id formals fnBody
-		{
-		}
+fnDecl			: type id formals fnBody {}
 
-formals	: LPAREN RPAREN
-		  {
-		  }
-		| LPAREN formalsList RPAREN
-		  {
-		  }
+formals			: LPAREN RPAREN {}
+						| LPAREN formalsList RPAREN {}
 
-formalsList	: formalDecl
-		  {
-		  }
-		| formalDecl COMMA formalsList
-		  {
-		  }
+formalsList	: formalDecl {}
+						| formalDecl COMMA formalsList {}
 
-formalDecl	: type id
-		  {
-		  }
+formalDecl  : type id {}
 
-fnBody	: LCURLY stmtList RCURLY
-		  {
-		  }
+fnBody			: LCURLY stmtList RCURLY {}
 
-stmtList	: stmtList stmt
-		  {
-		  }
-		| /* epsilon */
-		  {
-		  }
+stmtList		: stmtList stmt {}
+						| /* epsilon */ {}
 
-stmt		: varDecl SEMICOLON
-	  	  { 
-		  }
-		| assignExp SEMICOLON
-	  	  { 
-		  }
-		| lval DASHDASH SEMICOLON
-	  	  { 
-		  }
-		| lval CROSSCROSS SEMICOLON
-	  	  { 
-		  }
-		| FROMCONSOLE lval SEMICOLON
-	  	  { 
-		  }
-		| TOCONSOLE exp SEMICOLON
-	  	  { 
-		  }
-		| IF LPAREN exp RPAREN LCURLY stmtList RCURLY
-	  	  { 
-		  }
-		| IF LPAREN exp RPAREN LCURLY stmtList RCURLY ELSE LCURLY stmtList RCURLY
-	  	  { 
-		  }
-		| WHILE LPAREN exp RPAREN LCURLY stmtList RCURLY
-	  	  { 
-		  }
-		| RETURN exp SEMICOLON
-	  	  { 
-		  }
-		| RETURN SEMICOLON
-	  	  { 
-		  }
-		| fncall SEMICOLON
-	  	  { 
-		  }
+stmt 				: varDecl SEMICOLON {}
+						| assignExp SEMICOLON {}
+						| lval DASHDASH SEMICOLON {}
+						| lval CROSSCROSS SEMICOLON {}
+						| FROMCONSOLE lval SEMICOLON {}
+						| TOCONSOLE exp SEMICOLON {}
+						| IF LPAREN exp RPAREN LCURLY stmtList RCURLY {}
+						| IF LPAREN exp RPAREN LCURLY stmtList RCURLY ELSE LCURLY stmtList RCURLY {}
+						| WHILE LPAREN exp RPAREN LCURLY stmtList RCURLY {}
+						| RETURN exp SEMICOLON {}
+						| RETURN SEMICOLON {}
+						| fncall SEMICOLON {}
 
-assignExp	: lval ASSIGN exp
-		  {
-		  }
+assignExp		: lval ASSIGN exp {}
 
-fncall	: id LPAREN RPAREN
-		  {
-		  }
-		| id LPAREN actualsList RPAREN
-		  {
-		  }
+fncall			: id LPAREN RPAREN {}
+						| id LPAREN actualsList RPAREN {}
 
-actualsList	: exp
-		  {
-		  }
-		| actualsList COMMA exp
-		  {
-		  }
+actualsList	: exp {}
+						| actualsList COMMA exp {}
 
-exp		: assingnExp
-	  	  { 
-		  }
-		| exp DASH exp
-	  	  { 
-		  }
-		| exp CROSS exp
-	  	  { 
-		  }
-		| exp STAR exp
-	  	  { 
-		  }
-		| exp SLASH exp
-	  	  { 
-		  }
-		| exp AND exp
-	  	  { 
-		  }
-		| exp OR exp
-	  	  { 
-		  }
-		| exp EQUALS exp
-	  	  { 
-		  }
-		| exp NOTEQUALS exp
-	  	  { 
-		  }
-		| exp GREATER exp
-	  	  { 
-		  }
-		| exp GREATEREQ exp
-	  	  { 
-		  }
-		| exp LESS exp
-	  	  { 
-		  }
-		| exp LESSEQ exp
-	  	  { 
-		  }
-		| NOT exp
-	  	  { 
-		  }
-		| DASH term
-	  	  { 
-		  }
-		| term
-	  	  { 
-		  }
+exp					: orExp {} // NEED: RULE FOR ASSIGNMENT EXPRESSION
 
-term		: lval
-	  	  { 
-		  }
-		| INTLITERAL
-	  	  { 
-		  }
-		| STRLITERAL
-	  	  { 
-		  }
-		| CHORLIT
-	  	  { 
-		  }
-		| TRUE
-	  	  { 
-		  }
-		| FALSE
-	  	  { 
-		  }
-		| NULLPTR
-	  	  { 
-		  }
-		| LPAREN exp RPAREN
-	  	  { 
-		  }
-		| fncall
-	  	  { 
-		  }
+orExp				: orExp OR andExp {}
+						| andExp	{}
 
-lval		: id
-	  	  { 
-		  }
-		| id LBRACE exp RBRACE
-	  	  { 
-		  }
-		| AT id
-	  	  { 
-		  }
-		| CARAT id
-		  {
-		  }
+andExp 			: andExp AND reqExp {}
+			 			| reqExp {}
+
+reqExp 			: addSubExp EQUALS addSubExp {}
+						| addSubExp NOTEQUALS addSubExp {}
+						| addSubExp GREATER addSubExp {}
+						| addSubExp GREATEREQ addSubExp {}
+						| addSubExp LESS addSubExp {}
+						| addSubExp LESSEQ addSubExp {}
+						| addSubExp
+
+addSubExp 	: addSubExp CROSS multDivExp {}
+						| addSubExp DASH multDivExp {}
+						| multDivExp {}
+
+multDivExp 	: multDivExp STAR dashNotExp {}
+						| multDivExp SLASH dashNotExp {}
+						| dashNotExp {}
+					
+dashNotExp 	: DASH term {}  // NEED: RULE FOR NOT
+					 	| term {}
 
 
-id		: ID
-		  {
-		  }
+term				: lval {}
+						| INTLITERAL {}
+						| STRLITERAL {}
+						| CHARLIT {}
+						| TRUE {}
+						| FALSE {}
+						| NULLPTR {}
+						| LPAREN exp RPAREN {}
+						| fncall {}
+
+lval				: id {}
+						| id LBRACE exp RBRACE {}
+						| AT id {}
+						| CARAT id {}
+
+id					: ID {}
 	
 %%
 
