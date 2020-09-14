@@ -181,34 +181,24 @@ fncall			: id LPAREN RPAREN {}
 actualsList	: exp {}
 						| actualsList COMMA exp {}
 
-exp					: assignExp {} // Is this right?
-						| orExp {}
-
-orExp				: orExp OR andExp {}
-						| andExp	{}
-
-andExp 			: andExp AND reqExp {}
-			 			| reqExp {}
-
-reqExp 			: addSubExp EQUALS addSubExp {}
-						| addSubExp NOTEQUALS addSubExp {}
-						| addSubExp GREATER addSubExp {}
-						| addSubExp GREATEREQ addSubExp {}
-						| addSubExp LESS addSubExp {}
-						| addSubExp LESSEQ addSubExp {}
-						| addSubExp
-
-addSubExp 	: addSubExp CROSS multDivExp {}
-						| addSubExp DASH multDivExp {}
-						| multDivExp {}
-
-multDivExp 	: multDivExp STAR dashNotExp {}
-						| multDivExp SLASH dashNotExp {}
-						| dashNotExp {}
-					
-dashNotExp 	: NOT exp // Is this right?
+exp					: assignExp {}
+						| exp DASH exp {}
+						| exp CROSS exp {}
+						| exp STAR exp {}
+						| exp SLASH exp {}
+						| exp AND exp {}
+						| exp OR exp {}
+						| exp EQUALS exp {}
+						| exp NOTEQUALS exp {}
+						| exp GREATER exp {}
+						| exp GREATEREQ exp {}
+						| exp LESS exp {}
+						| exp LESSEQ exp {}
+						| NOT exp {}
 						| DASH term {}
-					 	| term {}
+						| term {}
+
+
 
 
 term				: lval {}
