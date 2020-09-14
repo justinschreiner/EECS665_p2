@@ -121,13 +121,13 @@ project)
  * declarations
 */
 
-%precedence NOT
-%left STAR SLASH
-%left CROSS DASH
-%nonassoc GREATER GREATEREQ EQUALS NOTEQUALS LESS LESSEQ
-%left AND
-%left OR
 %right ASSIGN
+%left OR
+%left AND
+%nonassoc GREATER GREATEREQ EQUALS NOTEQUALS LESS LESSEQ
+%left CROSS DASH
+%left STAR SLASH
+%precedence NOT
 
 
 
